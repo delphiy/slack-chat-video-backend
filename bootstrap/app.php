@@ -23,9 +23,8 @@ $app = new Laravel\Lumen\Application(
     dirname(__DIR__)
 );
 
-// $app->withFacades();
-
-// $app->withEloquent();
+$app->withFacades();
+$app->withEloquent();
 
 /*
 |--------------------------------------------------------------------------
@@ -60,6 +59,7 @@ $app->singleton(
 */
 
 $app->configure('app');
+$app->configure('services');
 
 /*
 |--------------------------------------------------------------------------
@@ -72,13 +72,13 @@ $app->configure('app');
 |
 */
 
-// $app->middleware([
-//     App\Http\Middleware\ExampleMiddleware::class
-// ]);
+ $app->middleware([
+     App\Http\Middleware\CorsMiddleware::class
+ ]);
 
-// $app->routeMiddleware([
-//     'auth' => App\Http\Middleware\Authenticate::class,
-// ]);
+ $app->routeMiddleware([
+     'auth' => App\Http\Middleware\Authenticate::class,
+ ]);
 
 /*
 |--------------------------------------------------------------------------
@@ -86,15 +86,15 @@ $app->configure('app');
 |--------------------------------------------------------------------------
 |
 | Here we will register all of the application's service providers which
-| are used to bind services into the container. Service providers are
+| are used to bind config into the container. Service providers are
 | totally optional, so you are not required to uncomment this line.
 |
 */
 
 // $app->register(App\Providers\AppServiceProvider::class);
-// $app->register(App\Providers\AuthServiceProvider::class);
+ $app->register(App\Providers\AuthServiceProvider::class);
 // $app->register(App\Providers\EventServiceProvider::class);
-
+ $app->register(\Laravel\Socialite\SocialiteServiceProvider::class);
 /*
 |--------------------------------------------------------------------------
 | Load The Application Routes

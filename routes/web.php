@@ -13,6 +13,8 @@
 |
 */
 
+$router->post('login', 'ApiTokenController@login');
+
 $router->get('/', function () use ($router) {
     return $router->app->version();
 });
