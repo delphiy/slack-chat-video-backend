@@ -29,7 +29,7 @@ class ApiTokenController extends Controller
             $apiToken = Str::random(60);
 
             if($existingUser) {
-                $existingUser->api_token = $existingUser;
+                $existingUser->api_token = $apiToken;
                 $existingUser->save();
 
                 return response()->json([
@@ -40,7 +40,7 @@ class ApiTokenController extends Controller
                 $newUser->name = $user->name;
                 $newUser->email = $user->email;
                 $newUser->password = Str::random(10);
-                $newUser->api_token = $existingUser;
+                $newUser->api_token = $apiToken;
                 $newUser->save();
                 return response()->json([
                     'api_token' => $apiToken
